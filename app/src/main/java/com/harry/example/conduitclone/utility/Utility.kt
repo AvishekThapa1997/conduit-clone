@@ -220,7 +220,7 @@ fun Context.drawable(drawableId: Int) = ContextCompat.getDrawable(this, drawable
 
 fun RequestManager.setImage(imageUrl: String, target: ImageView) {
     if (imageUrl.isNotEmpty() || imageUrl.isNotBlank()) {
-        load(imageUrl).centerCrop().into(target)
+        load(imageUrl).centerCrop().error(R.drawable.default_user_avataar).into(target)
     } else {
         target.setImageResource(R.drawable.default_user_avataar)
     }
