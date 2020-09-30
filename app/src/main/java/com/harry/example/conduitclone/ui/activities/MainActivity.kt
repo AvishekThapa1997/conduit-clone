@@ -31,7 +31,7 @@ import kotlinx.coroutines.withContext
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlin.properties.Delegates
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var navController: NavController
     private var currentDestinationId by Delegates.notNull<Int>()
@@ -207,9 +207,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (!username.isEmptyOrIsBlank()) {
             headerView.hello_text.text = getData(R.string.hello)
             headerView.user_name.text = username
+            headerView.profile_image.visibility = View.VISIBLE
+            headerView.hello_text.visibility = View.VISIBLE
+            headerView.user_name.visibility = View.VISIBLE
         } else {
-            headerView.hello_text.text = ""
-            headerView.user_name.text = ""
+            headerView.profile_image.visibility = View.INVISIBLE
+            headerView.hello_text.visibility = View.INVISIBLE
+            headerView.profile_image.visibility = View.INVISIBLE
         }
     }
 
@@ -250,7 +254,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    
+
 //    private fun checkPermissionForReadingStorage(): Int {
 //        return ContextCompat.checkSelfPermission(
 //            applicationContext,
