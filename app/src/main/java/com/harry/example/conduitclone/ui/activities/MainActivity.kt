@@ -54,10 +54,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 setupSupportActionBar(R.drawable.hamburger_menu)
                 return@OnDestinationChangedListener
             }
-            if (currentDestinationId == R.id.postArticleFragment)
-                menu_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            else
-                menu_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
             setupSupportActionBar(R.drawable.back)
         }
 
