@@ -83,8 +83,6 @@ class RegisterFragment : BaseFragment(), CustomTextWatcher, View.OnFocusChangeLi
 
     private fun observeAuth() {
         registerAuthViewModel.registeredUserResponse.observe(viewLifecycleOwner)  {
-            hideProgress()
-            enableOrDisable(true)
             when (it.status) {
                 Status.SUCCESS -> it.data?.let { user ->
                     viewLifecycleOwner.lifecycleScope.launch {
@@ -99,6 +97,8 @@ class RegisterFragment : BaseFragment(), CustomTextWatcher, View.OnFocusChangeLi
                 }
                 Status.ERROR -> view?.showMessage(it.message)
             }
+            hideProgress()
+            enableOrDisable(true)
         }
     }
 

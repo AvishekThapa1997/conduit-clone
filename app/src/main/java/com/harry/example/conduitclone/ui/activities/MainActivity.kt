@@ -197,9 +197,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             headerView.hello_text.visibility = View.VISIBLE
             headerView.user_name.visibility = View.VISIBLE
         } else {
-            headerView.profile_image.visibility = View.INVISIBLE
-            headerView.hello_text.visibility = View.INVISIBLE
-            headerView.profile_image.visibility = View.INVISIBLE
+            headerView.profile_image.visibility = View.GONE
+            headerView.hello_text.visibility = View.GONE
+            headerView.user_name.visibility = View.GONE
         }
     }
 
