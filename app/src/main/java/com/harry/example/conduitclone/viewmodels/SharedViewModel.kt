@@ -1,27 +1,22 @@
 package com.harry.example.conduitclone.viewmodels
 
 
-import android.net.Uri
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.harry.example.conduitclone.pojos.Article
 import com.harry.example.conduitclone.pojos.Author
-import com.harry.example.conduitclone.pojos.LoginAuth
 import com.harry.example.conduitclone.pojos.User
-import com.harry.example.conduitclone.repository.AppRepository
-import com.harry.example.conduitclone.utility.TOKEN
-import com.harry.example.conduitclone.utility.isEmptyOrIsBlank
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
-import org.koin.core.inject
-import java.io.File
+
+
 
 class SharedViewModel : ViewModel(), KoinComponent {
-    private val appRepository: AppRepository by inject()
+    //private val appRepository: AppRepository by inject()
     private val currentUser: MutableLiveData<User?> = MutableLiveData()
     val userDetails: LiveData<User?>
         get() = currentUser
@@ -58,16 +53,16 @@ class SharedViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun currentUser(token: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = appRepository.currentUser(TOKEN.plus(" ").plus(token))
-                response?.let { currentUser ->
-                    setCurrentUser(currentUser)
-                }
-            } catch (exception: Exception) {
-                setCurrentUser(null)
-            }
-        }
-    }
+//    fun currentUser(token: String) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                val response = appRepository.currentUser(TOKEN.plus(" ").plus(token))
+//                response?.let { currentUser ->
+//                    setCurrentUser(currentUser)
+//                }
+//            } catch (exception: Exception) {
+//                setCurrentUser(null)
+//            }
+//        }
+//    }
 }
