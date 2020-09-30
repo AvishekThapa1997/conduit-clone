@@ -71,8 +71,7 @@ class GlobalFeed : BaseFragment(), OnClickListener {
                     moreDataNeeded = true
                 }
             }
-            shimmerLayout.stopShimmer()
-            shimmerLayout.visibility = View.GONE
+            stopShimmer()
             if (more_data_loading_progress.isVisible) {
                 more_data_loading_progress.visibility = View.GONE
             }
@@ -109,6 +108,12 @@ class GlobalFeed : BaseFragment(), OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         swipe.setOnRefreshListener {
             swipe.isRefreshing = false
+        }
+        retry.setOnClickListener {
+            error_message.visibility = View.GONE
+            no_article_found.visibility = View.GONE
+            startShimmer()
+            getArticles()
         }
         setUpRecyclerView()
     }
@@ -192,8 +197,7 @@ class GlobalFeed : BaseFragment(), OnClickListener {
     }
 
     override fun showImageDialog(imageUrl: String?, view: View) {
-        //showImageDialogListener.showImageDialog(imageUrl)
-        val a =
+        val activityOptionsCompat =
             ActivityOptionsCompat.makeSceneTransitionAnimation(activity as Activity, view, "image")
         val intent = Intent(context, DialogActivity::class.java)
         val bundle = Bundle()
@@ -203,7 +207,7 @@ class GlobalFeed : BaseFragment(), OnClickListener {
             bundle.putString("url", "")
         }
         intent.putExtra("bundle", bundle)
-        activity?.startActivity(intent, a.toBundle())
+        activity?.startActivity(intent, activityOptionsCompat.toBundle())
     }
 
     private fun getArticles() {
@@ -213,6 +217,16 @@ class GlobalFeed : BaseFragment(), OnClickListener {
             homeViewModel.getArticles(token)
         }
 
+    }
+
+    private fun stopShimmer() {
+        shimmerLayout.stopShimmer()
+        shimmerLayout.visibility = View.GONE
+    }
+
+    private fun startShimmer() {
+        shimmerLayout.startShimmer()
+        shimmerLayout.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {
