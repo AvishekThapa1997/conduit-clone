@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:id="@+id/group_login_or_register"
+        android:checkableBehavior="single">
+<!--        <item-->
+<!--            android:id="@+id/delete"-->
+<!--            android:icon="@drawable/delete"-->
+<!--            android:title=""-->
+<!--            app:showAsAction="ifRoom" />-->
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_login"
+            android:title="@string/logout" />
+        <item
+            android:id="@+id/loginFragment"
+            android:icon="@drawable/ic_login"
+            android:title="@string/login_register" />
+    </group>
+    <group
+        android:id="@+id/home_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home"
+
+            />
+    </group>
+    <group
+        android:id="@+id/utility"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/settingFragment"
+            android:icon="@drawable/setting"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/info"
+            android:title="@string/about" />
+    </group>
+</menu>

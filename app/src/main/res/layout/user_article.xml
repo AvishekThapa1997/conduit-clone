@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.03" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.97" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toStartOf="@id/menu"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_guideline" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/barrier"
+            app:layout_constraintEnd_toStartOf="@id/menu"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <View
+            android:id="@+id/menu_anchor"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toTopOf="@id/menu"
+            app:layout_constraintEnd_toEndOf="@id/menu"
+            app:layout_constraintStart_toStartOf="@id/menu"
+            app:layout_constraintTop_toTopOf="@id/top_guideline" />
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/simple_menu_icon"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintTop_toBottomOf="@id/menu_anchor" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="content" />
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/follow_icon"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:contentDescription="@null"-->
+        <!--            app:layout_constraintTop_toTopOf="@id/profile_image"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/profile_image"-->
+        <!--            app:layout_constraintEnd_toEndOf="@id/profile_image"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/profile_image"-->
+        <!--            android:src="@drawable/tick"-->
+        <!--            android:visibility="gone"/>-->
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/author_profile_image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="@null"
+            app:layout_constraintBottom_toTopOf="@id/separator"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/content"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+        <TextView
+            android:id="@+id/author_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@id/article_created_date"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/author_profile_image"
+            app:layout_constraintTop_toTopOf="@id/author_profile_image" />
+
+        <TextView
+            android:id="@+id/article_created_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/author_profile_image"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/author_profile_image"
+            app:layout_constraintStart_toStartOf="@id/author_username"
+            app:layout_constraintTop_toBottomOf="@id/author_username" />
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/black"
+            app:layout_constraintBottom_toTopOf="@id/separator_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/separator_bg"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="#5CAAAAAA"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

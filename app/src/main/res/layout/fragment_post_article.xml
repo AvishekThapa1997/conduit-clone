@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionName="shared_element_transition"
+    tools:context=".ui.fragments.PostArticleFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.98" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.98" />
+
+        <EditText
+            android:id="@+id/article_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:hint="@string/article_title"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@id/article_description"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_guideline" />
+
+        <EditText
+            android:id="@+id/article_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints="@null"
+            android:hint="@string/description"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toTopOf="@id/article_body"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/article_title" />
+
+        <EditText
+            android:id="@+id/article_body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints="@null"
+            android:hint="@string/article_body"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toTopOf="@id/article_tags"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/article_description" />
+
+        <EditText
+            android:id="@+id/article_tags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:autofillHints="@null"
+            android:hint="@string/article_tags"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toStartOf="@id/add_tag"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/article_body" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/add_tag"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/article_tags"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/article_tags"
+            app:layout_constraintTop_toTopOf="@id/article_tags" />
+
+        <TextView
+            android:id="@+id/tags_instructions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/tags_instructions"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@id/chip_scroller"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/article_tags" />
+
+        <HorizontalScrollView
+            android:id="@+id/chip_scroller"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/tags_instructions"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_groups"
+                style="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </HorizontalScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/post_or_update_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/chip_scroller" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/hide_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="article_title,article_body,article_description,add_tag,article_tags,post_or_update_article" />
+
+        <ProgressBar
+            android:id="@+id/post_article_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="src_in"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_guideline" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
