@@ -50,16 +50,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             navigation_view.setCheckedItem(destination.id)
             currentDestinationId = destination.id
             fragmentId = currentDestinationId
-            if (currentDestinationId == R.id.splashFragment) {
-                toolbar.visibility = View.GONE
-                return@OnDestinationChangedListener
-            } else {
-                toolbar.visibility = View.VISIBLE
-            }
             if (currentDestinationId == R.id.homeFragment) {
                 setupSupportActionBar(R.drawable.hamburger_menu)
                 return@OnDestinationChangedListener
             }
+            if (currentDestinationId == R.id.postArticleFragment)
+                menu_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            else
+                menu_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
             setupSupportActionBar(R.drawable.back)
         }
 
@@ -68,14 +66,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         lifecycleScope.launch(Dispatchers.Default) {
             setUpTitles()
-//            intent.getBundleExtra(CURRENT_USER_BUNDLE)?.apply {
-//                if (containsKey(CURRENT_USER)) {
-//                    val user = getSerializable(CURRENT_USER) as User
-//                    sharedViewModel.setCurrentUser(user)
-//                    sharedViewModel.authToken = user.token
-//                }
-//
-//            }
             withContext(Dispatchers.Main) {
                 setSupportActionBar(findViewById(R.id.toolbar))
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
