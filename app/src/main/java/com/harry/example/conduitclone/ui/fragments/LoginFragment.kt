@@ -47,8 +47,6 @@ class LoginFragment : BaseFragment(), View.OnClickListener, View.OnFocusChangeLi
 
     private fun observeAuth() {
         loginAuthViewModel.currentUserResponse.observe(viewLifecycleOwner) {
-            hideProgress()
-            enableOrDisable(true)
             when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let { user ->
@@ -65,6 +63,8 @@ class LoginFragment : BaseFragment(), View.OnClickListener, View.OnFocusChangeLi
                 }
                 Status.ERROR -> view?.showMessage(it.message)
             }
+            hideProgress()
+            enableOrDisable(true)
         }
     }
 
