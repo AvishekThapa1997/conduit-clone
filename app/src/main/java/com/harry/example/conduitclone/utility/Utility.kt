@@ -17,7 +17,6 @@ import androidx.datastore.preferences.Preferences
 import androidx.datastore.preferences.createDataStore
 import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.preferencesKey
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.google.android.material.snackbar.Snackbar
 import com.harry.example.conduitclone.R
