@@ -91,7 +91,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //leak canary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 
     //room
     def room_version = "2.2.5"
