@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import com.google.android.material.chip.Chip
 import com.harry.example.conduitclone.R
 import com.harry.example.conduitclone.pojos.Article
 import com.harry.example.conduitclone.utility.*
 import com.harry.example.conduitclone.viewmodels.PostArticleViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_post_article.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -30,6 +33,7 @@ class PostArticleFragment : BaseFragment(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        (activity as AppCompatActivity).menu_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         post_or_update_article.setOnClickListener(this)
         arguments?.apply {
             val buttonText = getString(BUTTON_TEXT, "")
@@ -153,5 +157,10 @@ class PostArticleFragment : BaseFragment(), View.OnClickListener {
 
     private fun enableOrDisableViews(enabled: Boolean) {
         hide_views.isEnabled = enabled
+    }
+
+    override fun onDestroyView() {
+        (activity as AppCompatActivity).menu_drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        super.onDestroyView()
     }
 }
