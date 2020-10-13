@@ -191,13 +191,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun setWelcomeUserData(username: String) {
         val headerView = navigation_view.getHeaderView(0)
         if (!username.isEmptyOrIsBlank()) {
-            headerView.hello_text.text = getData(R.string.hello)
             headerView.user_name.text = username
-            headerView.profile_image.visibility = View.VISIBLE
             headerView.hello_text.visibility = View.VISIBLE
             headerView.user_name.visibility = View.VISIBLE
         } else {
-            headerView.profile_image.visibility = View.GONE
             headerView.hello_text.visibility = View.GONE
             headerView.user_name.visibility = View.GONE
         }
