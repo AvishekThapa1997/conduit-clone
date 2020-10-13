@@ -33,7 +33,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.75" />
 
-    <com.google.android.material.imageview.ShapeableImageView
+<!--     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_image"
         style="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
         android:layout_width="75dp"
@@ -42,20 +42,20 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
-        app:layout_constraintTop_toTopOf="@id/top_guideline"/>
+        app:layout_constraintTop_toTopOf="@id/top_guideline"/> -->
 
     <TextView
         android:id="@+id/hello_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:textAllCaps="true"
+        android:text="@string/hello"
         android:visibility="gone"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/user_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profile_image"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+        app:layout_constraintStart_toEndOf="@id/start_guideline"
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
     <TextView
@@ -63,11 +63,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:visibility="gone"
+        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
+        app:layout_constraintBottom_toBottomOf="@id/hello_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/hello_text" />
+        app:layout_constraintStart_toEndOf="@id/hello_text"
+        app:layout_constraintTop_toTopOf="@+id/hello_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>
