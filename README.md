@@ -16,4 +16,4 @@
 </table>
 
 ## Demo
-<img src="app/records/1.gif" height="400">
+<img src="app/records/1.gif">
