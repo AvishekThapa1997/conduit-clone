@@ -1,6 +1,5 @@
 # Screenshots
 <table>
-        <tbody>
         <tr>
           <td><img src="app/screenshots/1.jpg" height="400"></td>
           <td><img src="app/screenshots/2.jpg" height="400"></td>
@@ -14,7 +13,6 @@
              <td><img src="app/screenshots/7.jpg" height="400"></td>
               <td><img src="app/screenshots/8.jpg" height="400"></td>
          </tr>
-</tbody>
 </table>
 
 ## Demo
