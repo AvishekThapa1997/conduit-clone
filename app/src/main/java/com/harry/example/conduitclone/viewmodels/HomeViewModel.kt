@@ -7,16 +7,12 @@ import com.harry.example.conduitclone.pojos.*
 import com.harry.example.conduitclone.repository.AppRepository
 import com.harry.example.conduitclone.utility.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 
 class HomeViewModel : ViewModel(), KoinComponent {
-    companion object {
-        const val TAG = "TAG"
-    }
 
     val offset
         get() = appRepository.offset
@@ -39,22 +35,27 @@ class HomeViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun favouriteArticle(token: String?, slug: String?, position: Int) {
+    fun favouriteArticle(token: String?, slug: String?, position: Int, onError: (String) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val article = appRepository.favouriteArticle(TOKEN.plus(" ").plus(token), slug)
                 article?.let {
-                    it.article?.let {
-                        updateList(position, it)
+                    it.article?.let { updatedArticle ->
+                        updateList(position, updatedArticle)
                     }
                 }
             } catch (exception: Exception) {
-
+                onError(setMessageWithRespectToException(exception))
             }
         }
     }
 
-    fun unFavouriteArticle(token: String?, slug: String?, position: Int) {
+    fun unFavouriteArticle(
+        token: String?,
+        slug: String?,
+        position: Int,
+        onError: (String) -> Unit
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val article = appRepository.unFavouriteArticle(TOKEN.plus(" ").plus(token), slug)
@@ -64,7 +65,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
                     }
                 }
             } catch (exception: Exception) {
-
+                onError(setMessageWithRespectToException(exception))
             }
         }
     }

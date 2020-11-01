@@ -169,24 +169,16 @@ class GlobalFeed : BaseFragment(), OnClickListener {
 
     override fun favouriteArticle(
         articleSlug: String?,
-        position: Int
+        position: Int,
     ) {
-        if (isNetworkAvailable) {
-            articleSlug?.let {
-                homeViewModel.favouriteArticle(token, articleSlug, position)
-            }
-        } else {
-            view?.showMessage(UNKNOWN_HOST_EXCEPTION)
+        homeViewModel.favouriteArticle(token, articleSlug, position) { errorMessage ->
+            view?.showMessage(errorMessage)
         }
     }
 
     override fun unFavouriteArticle(articleSlug: String?, position: Int) {
-        if (isNetworkAvailable) {
-            articleSlug?.let {
-                homeViewModel.unFavouriteArticle(token, articleSlug, position)
-            }
-        } else {
-            view?.showMessage(UNKNOWN_HOST_EXCEPTION)
+        homeViewModel.unFavouriteArticle(token, articleSlug, position){errorMessage ->
+            view?.showMessage(errorMessage)
         }
     }
 
