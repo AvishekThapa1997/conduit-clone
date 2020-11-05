@@ -19,7 +19,6 @@ import com.harry.example.conduitclone.ui.activities.DialogActivity
 import com.harry.example.conduitclone.utility.*
 import com.harry.example.conduitclone.viewmodels.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_global_feed.*
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
@@ -27,16 +26,12 @@ import java.lang.ref.WeakReference
 class GlobalFeed : BaseFragment(), OnClickListener {
 
     private val homeViewModel: HomeViewModel by viewModel()
-    private val networkChecker: NetworkChecker by inject()
-    private var isNetworkAvailable = false
+   // private val networkChecker: NetworkChecker by inject()
     private var token: String = ""
     private var isRecyclerViewDataLoaded = false
     private var moreDataNeeded = true
     private val recyclerViewScrollListener: RecyclerView.OnScrollListener =
         object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            }
-
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItem = recyclerView.layoutManager?.childCount
                 val totalItem = globalFeedAdapter.itemCount
@@ -81,7 +76,6 @@ class GlobalFeed : BaseFragment(), OnClickListener {
     private lateinit var globalFeedAdapter: GlobalFeedAdapter
     private var followUserListener: OnClickListener? = null
 
-
     override val layoutId = R.layout.fragment_global_feed
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +97,6 @@ class GlobalFeed : BaseFragment(), OnClickListener {
             getArticles()
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipe.setOnRefreshListener {
@@ -121,17 +114,23 @@ class GlobalFeed : BaseFragment(), OnClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         observeArticles()
-        observeNetworkStatus()
+        observeError()
     }
 
-    private fun observeNetworkStatus() {
-        networkChecker.observe(viewLifecycleOwner) {
-            isNetworkAvailable = it
+    private fun observeError() {
+        homeViewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            view?.showMessage(errorMessage)
         }
     }
 
+//    private fun observeNetworkStatus() {
+//        networkChecker.observe(viewLifecycleOwner) {
+//           // isNetworkAvailable = it
+//        }
+//    }
+
     private fun observeArticles() =
-        homeViewModel.apiResposne.observe(viewLifecycleOwner, articlesResponseObserver)
+        homeViewModel.apiResponse.observe(viewLifecycleOwner, articlesResponseObserver)
 
     private fun setUpRecyclerView() {
         recycler_view.layoutManager = LinearLayoutManager(context)
@@ -171,15 +170,11 @@ class GlobalFeed : BaseFragment(), OnClickListener {
         articleSlug: String?,
         position: Int,
     ) {
-        homeViewModel.favouriteArticle(token, articleSlug, position) { errorMessage ->
-            view?.showMessage(errorMessage)
-        }
+        homeViewModel.favouriteArticle(token, articleSlug, position)
     }
 
     override fun unFavouriteArticle(articleSlug: String?, position: Int) {
-        homeViewModel.unFavouriteArticle(token, articleSlug, position){errorMessage ->
-            view?.showMessage(errorMessage)
-        }
+        homeViewModel.unFavouriteArticle(token, articleSlug, position)
     }
 
     override fun toArticleDetailsFragment(position: Int) {
@@ -208,7 +203,6 @@ class GlobalFeed : BaseFragment(), OnClickListener {
         } ?: run {
             homeViewModel.getArticles(token)
         }
-
     }
 
     private fun stopShimmer() {
