@@ -215,9 +215,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         sharedViewModel.setCurrentUser(null)
         sharedViewModel.articles = null
         sharedViewModel.currentUserFeeds = null
-        lifecycleScope.launch {
-            applicationContext.saveJwtToken("")
-        }
+//        lifecycleScope.launch {
+//            applicationContext.saveJwtToken("")
+//        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
