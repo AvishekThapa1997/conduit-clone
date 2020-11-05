@@ -17,12 +17,15 @@ class HomeViewModel : ViewModel(), KoinComponent {
     val offset
         get() = appRepository.offset
     private val appRepository: AppRepository by inject()
-    private val apiArticlesResponse: MutableLiveData<Resource<List<Article>?>> =
+    private val _apiResponse: MutableLiveData<Resource<List<Article>?>> =
         MutableLiveData()
 
-    val apiResposne: LiveData<Resource<List<Article>?>>
-        get() = apiArticlesResponse
+    val apiResponse: LiveData<Resource<List<Article>?>>
+        get() = _apiResponse
 
+    private val _errorMessage: MutableLiveData<String> = MutableLiveData()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
 
     fun getArticles(token: String, username: String = "") {
         viewModelScope.launch(Dispatchers.IO) {
@@ -35,7 +38,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
         }
     }
 
-    fun favouriteArticle(token: String?, slug: String?, position: Int, onError: (String) -> Unit) {
+    fun favouriteArticle(token: String?, slug: String?, position: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val article = appRepository.favouriteArticle(TOKEN.plus(" ").plus(token), slug)
@@ -45,7 +48,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
                     }
                 }
             } catch (exception: Exception) {
-                onError(setMessageWithRespectToException(exception))
+                _errorMessage.postValue(setMessageWithRespectToException(exception))
             }
         }
     }
@@ -53,8 +56,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
     fun unFavouriteArticle(
         token: String?,
         slug: String?,
-        position: Int,
-        onError: (String) -> Unit
+        position: Int
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -65,14 +67,14 @@ class HomeViewModel : ViewModel(), KoinComponent {
                     }
                 }
             } catch (exception: Exception) {
-                onError(setMessageWithRespectToException(exception))
+                _errorMessage.postValue(setMessageWithRespectToException(exception))
             }
         }
     }
 
     private fun updateList(position: Int, article: Article) {
         val updatedArticleList = mutableListOf<Article>()
-        apiArticlesResponse.value?.data?.let {
+        _apiResponse.value?.data?.let {
             updatedArticleList.addAll(it)
         }
         updatedArticleList[position] = article
@@ -101,7 +103,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
                 val filteredList = this.filter {
                     !it.author?.username.equals(username)
                 }
-                apiArticlesResponse.value?.data?.let {
+                _apiResponse.value?.data?.let {
                     if (it.isNotEmpty()) {
                         val newList = mutableListOf<Article>()
                         newList.addAll(it)
@@ -116,7 +118,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
     }
 
     private fun setListOfArticles(articles: List<Article>) {
-        apiArticlesResponse.postValue(
+        _apiResponse.postValue(
             Resource.success(
                 articles
             )
@@ -124,7 +126,7 @@ class HomeViewModel : ViewModel(), KoinComponent {
     }
 
     private fun setErrorMessage(message: String) {
-        apiArticlesResponse.postValue(
+        _apiResponse.postValue(
             Resource.error(
                 message
             )
