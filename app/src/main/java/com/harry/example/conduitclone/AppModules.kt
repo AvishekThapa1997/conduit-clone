@@ -5,7 +5,6 @@ import com.harry.example.conduitclone.repository.AppRepository
 import com.harry.example.conduitclone.utility.*
 import com.harry.example.conduitclone.viewmodels.*
 import okhttp3.OkHttpClient
-import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -26,7 +25,6 @@ val viewModelModules = module {
 }
 
 val networkModules = module {
-    single{ NetworkChecker(androidContext()) }
     single{
         OkHttpClient.Builder().apply {
             connectTimeout(CONNECTION_TIMEOUT_LIMIT, TimeUnit.SECONDS)
