@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.harry.example.conduitclone.viewmodels.SharedViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
