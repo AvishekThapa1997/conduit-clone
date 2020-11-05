@@ -2,7 +2,6 @@ package com.harry.example.conduitclone.ui.fragments
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.viewpager2.widget.ViewPager2
