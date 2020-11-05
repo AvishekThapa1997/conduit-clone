@@ -156,7 +156,9 @@ class PostArticleFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun enableOrDisableViews(enabled: Boolean) {
-        hide_views.isEnabled = enabled
+        hide_views.referencedIds.forEach { viewId ->
+            view?.findViewById<View>(viewId)?.isEnabled = enabled
+        }
     }
 
     override fun onDestroyView() {
