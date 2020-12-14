@@ -18,7 +18,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, View.OnFocusChangeLi
     private val loginAuthViewModel: LoginAuthViewModel by viewModel()
 
     override val layoutId = R.layout.fragment_login
-
+    private var errorShown = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         to_register.setOnClickListener {
@@ -42,6 +42,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener, View.OnFocusChangeLi
         enableOrDisable(false)
         showProgress()
         sharedViewModel.articles = null
+        errorShown = false
         loginAuthViewModel.loginUser(email, password)
     }
 
@@ -61,7 +62,12 @@ class LoginFragment : BaseFragment(), View.OnClickListener, View.OnFocusChangeLi
                             )
                     }
                 }
-                Status.ERROR -> view?.showMessage(it.message)
+                Status.ERROR ->{
+                    if(!errorShown){
+                        view?.showMessage(it.message)
+                        errorShown = true
+                    }
+                }
             }
             hideProgress()
             enableOrDisable(true)
