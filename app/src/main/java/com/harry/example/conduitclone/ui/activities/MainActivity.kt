@@ -20,6 +20,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.harry.example.conduitclone.R
+import com.harry.example.conduitclone.pojos.User
 import com.harry.example.conduitclone.utility.*
 import com.harry.example.conduitclone.viewmodels.SharedViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -60,6 +61,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        intent.extras?.apply {
+            if (containsKey(CURRENT_USER)) {
+                val user: User = getSerializable(CURRENT_USER) as User
+                sharedViewModel.setCurrentUser(user)
+            }
+        }
         lifecycleScope.launch(Dispatchers.Default) {
             setUpTitles()
             withContext(Dispatchers.Main) {
@@ -212,12 +219,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //    }
 
     private fun logOutUser() {
+        lifecycleScope.launch {
         sharedViewModel.setCurrentUser(null)
         sharedViewModel.articles = null
         sharedViewModel.currentUserFeeds = null
-//        lifecycleScope.launch {
-//            applicationContext.saveJwtToken("")
-//        }
+
+            applicationContext.saveJwtToken("")
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
