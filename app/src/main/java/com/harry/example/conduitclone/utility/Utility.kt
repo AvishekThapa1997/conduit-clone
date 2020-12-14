@@ -103,7 +103,7 @@ private fun dateDetails(date: Date?): String {
     return ""
 }
 
-fun updatedTime(dateAgo: String?): String? {
+fun updatedTime(dateAgo: String?): String {
     if (!dateAgo.isNullOrEmpty() && !dateAgo.isNullOrBlank()) {
         val updatedDate = parsedDate(dateAgo)
         updatedDate?.let {
