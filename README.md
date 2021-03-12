@@ -17,3 +17,5 @@
 
 ## Demo
 <img src="app/records/1.gif">
+
+<a href="app/apk/Conduit.apk">Download APK</a>
